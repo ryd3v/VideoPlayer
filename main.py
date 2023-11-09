@@ -1,6 +1,7 @@
 import sys
 
 import gi
+from PyQt6.QtCore import QSize
 from PyQt6.QtGui import QAction
 
 gi.require_version('Gst', '1.0')
@@ -35,8 +36,9 @@ class VideoWidget(QWidget):
 
     def on_sync_message(self, bus, message):
         if message.get_structure().get_name() == 'prepare-window-handle':
-            message.src.set_property('force-aspect-ratio', True)
-            message.src.set_window_handle(self.winId())
+            if message.src is self.pipeline.get_by_name('videosink'):
+                overlay = message.src
+                overlay.set_window_handle(self.winId())
 
     def play(self):
         self.pipeline.set_state(Gst.State.PLAYING)
@@ -58,6 +60,7 @@ class MainWindow(QMainWindow):
 
         self.play_button = QPushButton("Play", self)
         self.play_button.clicked.connect(self.video_widget.play)
+        self.play_button.setMaximumSize(QSize(150, 30))
         self.play_button.setStyleSheet("""
                                             QPushButton {
                                                 background-color: #3b82f6;
@@ -74,6 +77,7 @@ class MainWindow(QMainWindow):
 
         self.pause_button = QPushButton("Pause", self)
         self.pause_button.clicked.connect(self.video_widget.pause)
+        self.pause_button.setMaximumSize(QSize(150, 30))
         self.pause_button.setStyleSheet("""
                                             QPushButton {
                                                 background-color: #3b82f6;
@@ -90,6 +94,7 @@ class MainWindow(QMainWindow):
 
         self.stop_button = QPushButton("Stop", self)
         self.stop_button.clicked.connect(self.video_widget.stop)
+        self.stop_button.setMaximumSize(QSize(150, 30))
         self.stop_button.setStyleSheet("""
                                             QPushButton {
                                                 background-color: #3b82f6;
@@ -110,7 +115,7 @@ class MainWindow(QMainWindow):
         button_layout.addWidget(self.stop_button)
 
         main_layout = QVBoxLayout()
-        main_layout.addWidget(self.video_widget)  # This would be your video display widget
+        main_layout.addWidget(self.video_widget)
         main_layout.addLayout(button_layout)
 
         central_widget = QWidget()
@@ -120,9 +125,7 @@ class MainWindow(QMainWindow):
     def setup_menu_bar(self):
         menu_bar = QMenuBar(self)
         self.setMenuBar(menu_bar)
-
         file_menu = menu_bar.addMenu("File")
-
         open_action = QAction("Open", self)
         open_action.triggered.connect(self.open_file)
         file_menu.addAction(open_action)
@@ -133,10 +136,6 @@ class MainWindow(QMainWindow):
             self.video_widget.stop()
             self.video_widget.set_video(file_name)
             self.video_widget.play()
-
-    def closeEvent(self, event):
-        self.video_widget.stop()
-        super(MainWindow, self).closeEvent(event)
 
     def closeEvent(self, event):
         self.video_widget.stop()
