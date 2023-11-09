@@ -2,7 +2,7 @@ import sys
 
 import gi
 from PyQt6.QtCore import QSize
-from PyQt6.QtGui import QAction
+from PyQt6.QtGui import QAction, QIcon
 
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst
@@ -143,6 +143,7 @@ class MainWindow(QMainWindow):
 
 
 app = QApplication(sys.argv)
+app.setWindowIcon(QIcon('video.ico'))
 app.setStyle("Fusion")
 main_window = MainWindow()
 main_window.setWindowTitle("VideoPlayer")
