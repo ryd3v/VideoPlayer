@@ -53,6 +53,7 @@ class VideoWidget(QWidget):
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+        self.setWindowIcon(QIcon('video.ico'))
         self.video_widget = VideoWidget(self)
         self.setCentralWidget(self.video_widget)
         self.resize(400, 100)
