@@ -53,27 +53,22 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.video_widget = VideoWidget(self)
         self.setCentralWidget(self.video_widget)
-        self.resize(400, 200)
+        self.resize(400, 100)
         self.setup_menu_bar()
 
         self.play_button = QPushButton("Play", self)
         self.play_button.clicked.connect(self.video_widget.play)
         self.play_button.setStyleSheet("""
                                             QPushButton {
-                                                background-color: #2a82da;
-                                                border-style: solid;
-                                                border-width: 2px;
-                                                border-radius: 10px;
-                                                border-color: #2a82da;
-                                                font: bold 14px;
-                                                min-width: 5em;
-                                                padding: 6px;
+                                                background-color: #3b82f6;
+                                                border-radius: 8px;
+                                                height: 30px;
                                             }
                                             QPushButton:hover {
-                                                background-color: #55aaff;
+                                                background-color: #27272a;
                                             }
                                             QPushButton:pressed {
-                                                background-color: #0077cc;
+                                                background-color: #2563eb;
                                             }
                                         """)
 
@@ -81,20 +76,15 @@ class MainWindow(QMainWindow):
         self.pause_button.clicked.connect(self.video_widget.pause)
         self.pause_button.setStyleSheet("""
                                             QPushButton {
-                                                background-color: #2a82da;
-                                                border-style: solid;
-                                                border-width: 2px;
-                                                border-radius: 10px;
-                                                border-color: #2a82da;
-                                                font: bold 14px;
-                                                min-width: 5em;
-                                                padding: 6px;
+                                                background-color: #3b82f6;
+                                                border-radius: 8px;
+                                                height: 30px;
                                             }
                                             QPushButton:hover {
-                                                background-color: #55aaff;
+                                                background-color: #27272a;
                                             }
                                             QPushButton:pressed {
-                                                background-color: #0077cc;
+                                                background-color: #2563eb;
                                             }
                                         """)
 
@@ -102,20 +92,15 @@ class MainWindow(QMainWindow):
         self.stop_button.clicked.connect(self.video_widget.stop)
         self.stop_button.setStyleSheet("""
                                             QPushButton {
-                                                background-color: #2a82da;
-                                                border-style: solid;
-                                                border-width: 2px;
-                                                border-radius: 10px;
-                                                border-color: #2a82da;
-                                                font: bold 14px;
-                                                min-width: 5em;
-                                                padding: 6px;
+                                                background-color: #3b82f6;
+                                                border-radius: 8px;
+                                                height: 30px;
                                             }
                                             QPushButton:hover {
-                                                background-color: #55aaff;
+                                                background-color: #27272a;
                                             }
                                             QPushButton:pressed {
-                                                background-color: #0077cc;
+                                                background-color: #2563eb;
                                             }
                                         """)
 
@@ -161,6 +146,7 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 app.setStyle("Fusion")
 main_window = MainWindow()
+main_window.setWindowTitle("VideoPlayer")
 main_window.show()
 main_window.video_widget.play()
 sys.exit(app.exec())
