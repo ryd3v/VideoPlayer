@@ -1,5 +1,7 @@
 # VideoPlayer
 
+![ALT](Screenshot.png)
+
 ### Prerequisites
 
 You may need to install:
