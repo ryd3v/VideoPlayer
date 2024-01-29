@@ -14,7 +14,7 @@ sudo apt-get install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-p
 sudo apt-get install python3-gst-1.0
 ```
 
-On Debian one of the requirements uses [PyGObject](https://pygobject.readthedocs.io/en/latest/index.html)
+## Debian one of the requirements uses [PyGObject](https://pygobject.readthedocs.io/en/latest/index.html)
 
 ```bash
 sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-4.0
@@ -36,6 +36,21 @@ pip install PyGObject
 ```
 
 you also need to run,
+
+```bash
+pip install -r requirements.txt
+```
+----
+
+## Fedora 
+
+```bash
+sudo dnf install gobject-introspection-devel cairo-gobject-devel
+```
+
+```bash
+sudo dnf install python3-devel
+```
 
 ```bash
 pip install -r requirements.txt
